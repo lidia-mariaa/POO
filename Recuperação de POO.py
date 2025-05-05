@@ -1,16 +1,20 @@
 #Recuperação de POO
 #Questão 1
+#Escreva um programa que peça uma nota, entre zero e dez. Mostre uma mensagem caso
+#o valor seja inválido e continue pedindo até que o usuário informe um valor válido.
 while True:
-    #nota = int(input("Informe uma nota entre 0 e 10"))
-    nota_str = input("Informe uma nota entre 0 e 10")
-    if nota_str.isdigit():
-        nota = int(nota_str)
-        if 0 <= nota <= 10:
-            print(f"A nota {nota} válida")
+    nota_str = input("Informe uma nota:")
+    if nota_str.isdigit(): #isdigit() usada para verificar se todos 
+        #os caracteres de uma string são dígitos numéricos
+        # (não reconhece sinais de ponto decimal ou negativos) 
+        nota_int = int(nota_str)
+        if 0 <= nota_int <= 10:
+            print(f"O valor {nota_int} é válido!")
+            break
         else:
-            print(f"A nota {nota} é inválida")
+            print("Valor inválido, tente novamente...")    
     else:
-        print("Valor inserido inválido")
+        print("Valor inválido, tente novamente...")
 
 #Questão 2
 #Podemos usar isso:
@@ -38,3 +42,46 @@ if maior == float("-inf"):
 else:
     print(f"Maior valor: {maior}")
     print(f"Menor valor: {menor}")
+
+#ou
+
+valores = []
+while True:
+    valores_str = input("Informe um valor (0 para sair): ")
+    if valores_str.isdigit() or valores_str.startswith("-"):
+        if valores_str != "0":
+            valores.append(int(valores_str))
+        else:
+            break
+print(f"O valor máximo é: {max(valores)}")
+print(f"O valor mínimo é: {min(valores)}")
+
+#Questão 3
+valores = []
+while True:
+    valores_str = input("Informe um valor (0 para sair): ")
+    if valores_str.isdigit() or valores_str.startswith("-"):
+        if valores_str != "0":
+            valores.append(int(valores_str))
+        else:
+            break
+print(f"O valor máximo é: {max(valores)}")
+print(f"O valor mínimo é: {min(valores)}")
+
+#Questão 4
+valores = []
+while True:
+    valores_str = input("Informe um valor (0 para sair): ")
+    if valores_str.isdigit() or valores_str.startswith("-"):
+        if valores_str != "0":
+            valores.append(int(valores_str))
+        else:
+            break
+valores_impares = []
+media = 0
+for i in range(len(valores)):
+    if valores[i]%2 != 0:
+        valores_impares.append(valores[i])
+for x in range(len(valores_impares)):
+    media += valores_impares[x]
+print(media/len(valores_impares))
