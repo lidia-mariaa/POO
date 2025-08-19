@@ -79,5 +79,5 @@ O "__init__" é um método especial dentro da classe em Python. Ele serve para "
 
 Quando você cria um objeto, você quer que ele já comece com algumas características (atributos) configuradas, certo?
 
-O __init__ é o lugar onde você diz quais informações o objeto precisa ter logo que nascer. Sem ele, o objeto nasce "vazio"
+O __init__ é o lugar onde você diz quais informações o objeto precisa ter logo que nascer. Sem ele, o objeto nasce "vazio" ou "padrão"
 '''
