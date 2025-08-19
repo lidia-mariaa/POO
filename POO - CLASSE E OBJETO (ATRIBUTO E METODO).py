@@ -9,6 +9,10 @@ Em vez de ficar criando código solto, você cria um objeto que tem:
 
 a) Atributos (Caraceterísticas, coisas que ele tem)
 b) Métodos (coisas que ele faz)
+Obs.: Para ser função precisa do 'return', o método também pode ter o 'return', porém, para ser método precisa do parâmetro 'self', ou seja:
+parâmetro -> sem return
+função -> com return
+método -> com self
 
 -----------------------------------------------------------------
 
@@ -16,7 +20,7 @@ b) Métodos (coisas que ele faz)
 
 2. Objeto é o produto real baseado nesse molde;
 
-3. Self é uma referência ao próprio objeto -> ele é usado dentro da classe para acessar os atributos e métodos do objeto atual. Self permite que a classe “saiba” a qual objeto específico ela está se referindo naquele momento.
+3. Self é um parâmetro que faz referência ao próprio objeto -> ele é usado dentro da classe para acessar os atributos e métodos do objeto atual. Self permite que a classe “saiba” a qual objeto específico ela está se referindo naquele momento.
 
 '''
 
@@ -38,5 +42,5 @@ O "__init__" é um método especial dentro da classe em Python. Ele serve para "
 
 Quando você cria um objeto, você quer que ele já comece com algumas características (atributos) configuradas, certo?
 
-O __init__ é o lugar onde você diz quais informações o objeto precisa ter logo que nascer. Sem ele, o objeto nasce "vazio" ou "padrão"
+O __init__ é o lugar onde você diz quais informações o objeto precisa ter logo que nascer. Sem ele, o objeto nasce "vazio"
 '''
