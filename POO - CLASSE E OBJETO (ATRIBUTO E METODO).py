@@ -16,7 +16,7 @@ método -> com self
 
 -----------------------------------------------------------------
 
-1. Classe é como um molde ou plano;
+1. Classe é como um molde ou plano, ela define oque todo objeto associado a ela deve ter;
 
 2. Objeto é o produto real baseado nesse molde;
 
@@ -24,10 +24,10 @@ método -> com self
 
 '''
 
-class Pessoa:
+class Pessoa: #Você criou a classe Pessoa
     def __init__(self, nome, idade): # Nome e idade são parâmetros do método "__init__" -> vou explicar ele abaixo
-        self.nome = nome # Atributo - características que o objeto vai guardar.
-        self.idade = idade # Atributo - características que o objeto vai guardar.
+        self.nome = nome # Atributo - características que o objeto vai guardar. -> aqui, o valor de nome que foi passado é guardado dentro do objeto
+        self.idade = idade # Atributo - características que o objeto vai guardar.-> aqui, o valor de idade que foi passado é guardado dentro do objeto
 
 p1 = Pessoa("Maria", 30) # Você criou um objeto chamado p1, que é uma pessoa. Essa pessoa tem nome = "Maria" e idade = 30
 # Ou seja, o valor do parâmetro nome ("Maria") é guardado no atributo self.nome do objeto p1
