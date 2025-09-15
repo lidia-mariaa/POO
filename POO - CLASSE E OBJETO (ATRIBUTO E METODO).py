@@ -44,3 +44,46 @@ Quando você cria um objeto, você quer que ele já comece com algumas caracter�
 
 O __init__ é o lugar onde você diz quais informações o objeto precisa ter logo que nascer. Sem ele, o objeto nasce "vazio"
 '''
+'''
+O __init__ é um contrutor, ou seja, ele é um método especial em uma classe que é executado automaticamente quando um objeto é criado.
+'''
+# Ex.:
+class Pessoa: 
+    def __init__(self, nome, idade):
+        self.nome = nome
+        self.idade = idade
+
+p1 = Pessoa("Ana", 25) # chama o construtor __init__
+# Dentro do __init__, o Python atribui: self.nome = "Ana" e self.idade = 25
+# O objeto p1 agora tem essas características.
+print(p1.nome)   # Ana
+print(p1.idade)  # 25
+# O construtor (__init__) é usado para criar e configurar um objeto assim que ele nasce.
+
+
+# Ex. de classe com demais métodos para o objeto:
+
+class Carro:
+    def __init__(self, marca):
+        self.marca = marca
+        self.velocidade = 0 # Já velocidade não precisa ser informada pelo usuário ao criar o objeto, porque todo carro novo começa parado. A velocidade inicial é sempre zero, então faz sentido definir um valor fixo no código, e não pedir como entrada.
+        # OBS.: Você só torna algo um parâmetro quando quer que o valor seja fornecido de fora (pelo usuário, por exemplo).
+
+    def acelerar(self): # Método = comportamento (ação)
+        self.velocidade += 10 # Atributo = característica (estado) -> o atributo, pode ou não vir como parâmetro, como vimos acima com o caso da velocidade.
+        print(f"{self.marca} acelerou. Velocidade atual: {self.velocidade} km/h")
+
+    def frear(self):
+        if self.velocidade >= 10:
+            self.velocidade -= 10
+        else:
+            self.velocidade = 0
+        print(f"{self.marca} freou. Velocidade atual: {self.velocidade} km/h")
+
+# Criando um objeto da classe Carro
+meu_carro = Carro("Toyota")
+
+# Usando métodos
+meu_carro.acelerar()  # Toyota acelerou. Velocidade atual: 10 km/h
+meu_carro.acelerar()  # Toyota acelerou. Velocidade atual: 20 km/h
+meu_carro.frear()     # Toyota freou. Velocidade atual: 10 km/h
