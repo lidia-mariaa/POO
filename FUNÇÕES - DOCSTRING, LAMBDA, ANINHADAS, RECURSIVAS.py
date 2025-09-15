@@ -1,3 +1,4 @@
+# FUNÇÕES - DOCSTRING, LAMBDA, ANINHADAS, RECURSIVAS
 
 # a) Docstring 
 # Docstring (document string) é uma string de documentação usada para descrever o propósito de uma função, classe ou módulo em Python. Ela aparece logo após a definição de uma função (ou classe/módulo) e é escrita entre aspas triplas (""" """ ou ''' ''').
