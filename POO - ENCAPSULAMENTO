@@ -1,0 +1,210 @@
+#ENCAPSULAMENTO
+'''
+O encapsulamento é um dos pilares da Programação Orientada a Objetos (POO), junto com herança, polimorfismo e abstração.
+Em resumo, encapsular significa proteger os dados internos de um objeto, permitindo o acesso e a modificação apenas de maneiras controladas.
+A ideia é “esconder” os detalhes internos de implementação e expor apenas o necessário através de métodos (funções dentro da classe), chamados de getters e setters.
+'''
+
+'''
+Conceito
+
+Encapsulamento é o princípio que restringe o acesso direto aos atributos e métodos internos de uma classe.
+A ideia é que o objeto esconda sua implementação interna e exponha apenas o que é necessário através de uma interface pública (métodos e propriedades).
+
+-> Implementação interna: É o código interno, os detalhes de funcionamento da classe ou função que ficam “escondidos” do usuário da classe.
+O usuário só precisa saber o que a classe faz, não como ela faz.
+
+Ex.: Imagine uma cafeteira ☕:
+
+Você aperta o botão "Fazer café" — isso é a interface pública.
+
+Dentro da máquina, ela ferve a água, pressuriza, filtra o pó — isso é a implementação interna.
+
+Você usa a cafeteira sem precisar entender ou alterar o que acontece lá dentro.
+'''
+#Ex. em Python:
+class Calculadora:
+    def somar(self, a, b):
+        return a + b
+
+    def subtrair(self, a, b):
+        return a - b
+
+#O usuário da classe usa:
+calc = Calculadora()
+print(calc.somar(2, 3))  # 5
+
+# Ele não precisa saber como o método somar funciona por dentro (a implementação interna). Ele só sabe o que o método faz (soma dois números).
+
+'''
+Isso:
+
+Garante segurança (evita acesso indevido aos dados);
+
+Facilita a manutenção (mudanças internas não afetam o código externo);
+
+Promove o controle sobre como os dados são lidos e alterados.
+'''
+
+# -> Encapsulamento em Python
+
+#1) Convenção de Acesso
+'''
+Em Python, o encapsulamento é mais uma convenção do que uma restrição rígida de acesso. Usamos prefixos em nomes de atributos para indicar que eles devem ser tratados como "privados" ou internos à classe:
+'''
+
+#a) Atributos públicos - Podem ser acessados de qualquer lugar.
+
+class Pessoa:
+    def __init__(self, nome):
+        self.nome = nome  # público
+
+p = Pessoa("Ana")
+print(p.nome)  # ✅ acesso direto permitido
+
+#b) Atributos protegidos (_atributo) - Por convenção, o underscore (_) indica que o atributo não deve ser acessado diretamente fora da classe ou subclasses.
+
+class Pessoa:
+    def __init__(self, nome):
+        self._nome = nome  # protegido
+
+p = Pessoa("Ana")
+print(p._nome)  # ⚠️ funciona, mas não é recomendado, pois o underscore (_) indica uma intenção: "Ei, este atributo é para uso interno da classe, não mexa nele diretamente!”
+#Isso é uma convenção em Python — ou seja, uma regra de boa prática, não algo que o Python obriga, assim você pode acessar, mas não deveria — a ideia é respeitar a interface pública da classe.
+
+#c) Atributos privados (__atributo) - Com dois underscores (__), o Python faz um name mangling, alterando internamente o nome do atributo para _NomeDaClasse__atributo. Isso evita o acesso acidental indica que claramente é um atributo privado (de uso interno)
+
+class Pessoa:
+    def __init__(self, nome):
+        self.__nome = nome  # privado
+
+p = Pessoa("Ana")
+# print(p.__nome)  # ❌ AttributeError
+print(p._Pessoa__nome)  # ✅ acesso possível, mas não recomendado, também devido a convenção de acesso
+
+#2) Getters e Setters (acesso controlado)
+'''
+Em POO (Programação Orientada a Objetos), getters e setters são métodos especiais usados para controlar o acesso aos atributos de uma classe.
+
+Eles fazem parte do encapsulamento, permitindo ler e alterar valores de forma segura, sem mexer diretamente nos atributos internos.
+'''
+#Getter
+'''
+O getter serve para obter (ler) o valor de um atributo privado ou protegido.
+'''
+#Exemplo:
+class Pessoa:
+    def __init__(self, nome):
+        self.__nome = nome  # atributo privado
+
+    # Getter
+    def get_nome(self):
+        return self.__nome
+
+#Uso:
+p = Pessoa("Ana")
+print(p.get_nome())  # 👉 mostra o nome (Ana)
+
+# Função:
+'''
+Permitir acessar o valor de forma controlada — se quiser, você pode colocar lógicas extras, como formatar o texto ou restringir acesso.
+'''
+
+#Setter
+'''
+O setter serve para alterar (modificar) o valor de um atributo privado.
+'''
+
+#Exemplo:
+class Pessoa:
+    def __init__(self, nome):
+        self.__nome = nome
+    
+    # Getter
+    def get_nome(self):
+        return self.__nome
+    
+    # Setter
+    def set_nome(self, novo_nome):
+        self.__nome = novo_nome
+
+
+#Uso:
+p = Pessoa("Ana")          # cria a pessoa
+print(p.get_nome())        # usa o getter → mostra "Ana"
+
+p.set_nome("Maria")        # usa o setter → muda o nome
+print(p.get_nome())        # mostra "Maria"
+
+#Função:
+'''
+Permitir modificar o valor com validações (sem deixar o usuário alterar qualquer coisa diretamente).
+'''
+'''
+A grande vantagem dos setters é que você pode incluir lógica de validação antes de permitir que o atributo seja modificado. Isso protege a integridade dos dados.
+'''
+#Ex.:
+class Pessoa:
+    # ... (init e getters)
+
+    def set_idade(self, nova_idade):
+        if nova_idade > 0: # Lógica de validação!
+            self._idade = nova_idade
+        else:
+            print("Idade inválida! Deve ser um número positivo.") #lógica de validação
+
+#3) Propriedades (@property e @setter)
+'''
+Em Python, as Propriedades oferecem uma maneira elegante de controlar o acesso a atributos de uma classe. Em vez de usar explicitamente métodos `get_` e `set_`, você pode usar decoradores para fazer com que os métodos de getter e setter se comportem como atributos normais.
+'''
+#@property ->  "getter"
+'''
+Ao usar `@property` acima de um método, ele se torna um "getter". Isso significa que você pode acessá-lo como se fosse um atributo (sem parênteses), e o método será executado.
+'''
+#@setter -> "setter"
+'''
+Define um método que será chamado quando você tentar atribuir um valor a esse atributo. Para definir um "setter" para a sua propriedade, você usa o decorador `@.setter` sobre outro método (com o mesmo nome da propriedade). Ele permite modificar um atributo privado de forma controlada, com validações ou processamento antes de realmente alterar o valor.
+'''
+#Ex.:
+class Pessoa:
+    def __init__(self, nome):
+        self.__nome = nome  # atributo privado
+
+    # Getter
+    @property
+    def nome(self):
+        return self.__nome
+
+    # Setter
+    @nome.setter
+    def nome(self, novo_nome):
+        if novo_nome.strip() != "":
+            self.__nome = novo_nome
+        else:
+            print("Nome inválido!")
+
+#Uso:
+p = Pessoa("Ana")
+print(p.nome)       # ✅ chama o getter → "Ana"
+
+p.nome = "Maria"    # ✅ chama o setter → muda o valor
+print(p.nome)       # "Maria"
+
+p.nome = ""         # ⚠️ chama o setter → "Nome inválido!"
+
+#O que está acontecendo
+'''
+@property → transforma o método nome() em getter.
+@nome.setter → define como será o setter para o mesmo atributo.
+
+Externamente, você usa como se fosse um atributo normal, mas internamente há métodos com lógica.
+'''
+
+#Vantagens dessa forma:
+'''
+Sintaxe mais limpa → p.nome em vez de p.get_nome().
+
+Mantém encapsulamento → atributo privado __nome.
+
+Permite validações e lógica no setter.
+'''
