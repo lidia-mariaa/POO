@@ -111,3 +111,72 @@ class Moto(Veiculo):
     def exibir_info(self):
         super().exibir_info() # Chamando o método exibir_info da classe pai e exibindo os atributos da moto
         print(f"Cilindradas: {self.cilindradas}")
+
+#---
+
+# Problema 4 - Contas Bancárias
+
+# Classe base -> Conta
+class Conta:
+    def __init__(self, titular, numero_conta, saldo=0):
+        # guardando os dados básicos da conta
+        self.titular = titular
+        self.numero_conta = numero_conta
+        self.saldo = saldo
+
+    def depositar(self, valor):
+        # só deposita se o valor for positivo
+        if valor > 0:
+            self.saldo += valor
+        else:
+            print("Valor de depósito inválido.")
+
+    def sacar(self, valor):
+        # saque básico: só deixa sacar se tiver saldo suficiente
+        if valor > 0:
+            if self.saldo >= valor:
+                self.saldo -= valor
+            else:
+                print("Saldo insuficiente.")
+        else:
+            print("Valor de saque inválido.")
+
+    def extrato(self):
+        # imprime informações da conta
+        print(f"Titular: {self.titular} | Conta: {self.numero_conta} | Saldo: {self.saldo:.2f}")
+
+# Classe Conta Poupança -> herda de Conta
+class ContaPoupanca(Conta):
+    def render_juros(self, taxa):
+        # aumenta o saldo com base na taxa de juros
+        if taxa > 0:
+            self.saldo += self.saldo * (taxa / 100)
+        else:
+            print("Taxa inválida.")
+
+    def sacar(self, valor):
+        # sobrescreve o sacar para garantir que a poupança nunca fica negativa
+        if valor > 0:
+            if self.saldo >= valor:
+                self.saldo -= valor
+            else:
+                print("Saque não permitido. Saldo insuficiente em Conta Poupança.")
+        else:
+            print("Valor de saque inválido.")
+
+# Classe Conta Corrente -> herda de Conta
+class ContaCorrente(Conta):
+    def __init__(self, titular, numero_conta, saldo=0, limite_cheque_especial=0):
+        # usa o init da classe mãe e adiciona o limite
+        super().__init__(titular, numero_conta, saldo)
+        self.limite_cheque_especial = limite_cheque_especial
+
+    def sacar(self, valor):
+        # saque especial: permite ficar no negativo até o limite
+        if valor > 0:
+            if self.saldo + self.limite_cheque_especial >= valor:
+                self.saldo -= valor
+            else:
+                print("Limite insuficiente para realizar o saque.")
+        else:
+            print("Valor de saque inválido.")
