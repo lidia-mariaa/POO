@@ -28,6 +28,54 @@ class Revista(Publicacao):
         super().__init__(titulo, ano_publicacao) # Referenciando a classe pai usando o super()
         self.edicao = edicao
 
+#---
+
+# Classe base -> Funcionario
+class Funcionario:
+    def __init__(self, nome, salario_base):
+        self.nome = nome
+        self.salario_base = salario_base
+
+    def calcular_salario(self):
+
+        return self.salario_base # Retorna o salário base por padrão
+
+# Classe Gerente -> herda de Funcionario
+class Gerente(Funcionario):
+    def __init__(self, nome, salario_base, bonus):
+        # Chama o construtor da classe pai (Funcionario)
+        super().__init__(nome, salario_base)
+        self.bonus = bonus
+
+    def calcular_salario(self):
+        # Retorna o salário base mais o bônus
+        return self.salario_base + self.bonus
+
+# Classe Programador -> herda de Funcionario
+class Programador(Funcionario):
+    def __init__(self, nome, salario_base, horas_extras, valor_hora_extra):
+        # Chama o construtor da classe pai (Funcionario)
+        super().__init__(nome, salario_base)
+        self.horas_extras = horas_extras
+        self.valor_hora_extra = valor_hora_extra
+
+    def calcular_salario(self):
+        # Retorna o salário base mais o total das horas extras
+        return self.salario_base + (self.horas_extras * self.valor_hora_extra)
+
+# Teste do sistema de funcionários
+if __name__ == "__main__":
+    # Criando uma lista heterogênea de funcionários
+    funcionarios = [
+        Gerente("Carlos", 5000, 1000),  # Gerente com bônus
+        Programador("Ana", 4000, 10, 50),  # Programador com horas extras
+        Gerente("Paulo", 6000, 1500),  # Outro Gerente com bônus
+        Programador("Maria", 3500, 5, 60)  # Outro Programador com horas extras
+    ]
+
+    # Iterando sobre a lista de funcionários e exibindo o nome e o salário calculado
+    for funcionario in funcionarios:
+        print(f"{funcionario.nome}: R${funcionario.calcular_salario():.2f}")
     def descrever(self):
         super().descrever()  # Chamando o método descrever da classe base
         print(f"Edição: {self.edicao}")
