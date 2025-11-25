@@ -41,3 +41,49 @@ livro.descrever()
 
 print("\nDescrição da revista:")
 revista.descrever()
+
+#---
+
+# Problema 2 - Veículos e Seus Atributos
+
+# Classe base -> Veiculo
+class Veiculo:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def exibir_info(self):
+        print(f"Marca: {self.marca}")
+        print(f"Modelo: {self.modelo}")
+
+# Classe Carro -> herda de veículo
+class Carro(Veiculo):
+    def __init__(self, marca, modelo, numero_portas): # Adicionei o atributo numero_portas
+        super().__init__(marca, modelo) # Referenciando a classe pai (Veiculo)
+        self.numero_portas = numero_portas
+
+    def exibir_info(self): # Chamando o método exibir_info da classe pai e exibindo os atributos do carro
+        super().exibir_info()
+        print(f"Número de portas: {self.numero_portas}")
+
+# Classe Moto -> herda de veículo
+class Moto(Veiculo):
+    def __init__(self, marca, modelo, cilindradas):
+        super().__init__(marca, modelo) # Referenciando a classe pai (Veiculo)
+        self.cilindradas = cilindradas
+
+    def exibir_info(self):
+        super().exibir_info() # Chamando o método exibir_info da classe pai e exibindo os atributos da moto
+        print(f"Cilindradas: {self.cilindradas}")
+
+# Alguns testes <3
+if __name__ == "__main__":
+    # Criando um carro e uma moto
+    carro = Carro("Ford", "Fusca", 4)
+    moto = Moto("Honda", "CB 500", 500)
+
+    print("Informações do Carro:")
+    carro.exibir_info()
+
+    print("\nInformações da Moto:")
+    moto.exibir_info()
