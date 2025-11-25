@@ -30,6 +30,8 @@ class Revista(Publicacao):
 
 #---
 
+# Problema 3 - Sistema de Funcionários
+
 # Classe base -> Funcionario
 class Funcionario:
     def __init__(self, nome, salario_base):
@@ -43,34 +45,30 @@ class Funcionario:
 # Classe Gerente -> herda de Funcionario
 class Gerente(Funcionario):
     def __init__(self, nome, salario_base, bonus):
-        # Chama o construtor da classe pai (Funcionario)
-        super().__init__(nome, salario_base)
+        super().__init__(nome, salario_base) # Referenciando a classe base (Funcionario)
         self.bonus = bonus
 
     def calcular_salario(self):
-        # Retorna o salário base mais o bônus
-        return self.salario_base + self.bonus
+        return self.salario_base + self.bonus # Retorna o salário base mais o bônus
 
 # Classe Programador -> herda de Funcionario
 class Programador(Funcionario):
     def __init__(self, nome, salario_base, horas_extras, valor_hora_extra):
-        # Chama o construtor da classe pai (Funcionario)
-        super().__init__(nome, salario_base)
+        super().__init__(nome, salario_base) # Referenciando a classe base (Funcionario)
         self.horas_extras = horas_extras
         self.valor_hora_extra = valor_hora_extra
 
     def calcular_salario(self):
-        # Retorna o salário base mais o total das horas extras
-        return self.salario_base + (self.horas_extras * self.valor_hora_extra)
+        return self.salario_base + (self.horas_extras * self.valor_hora_extra) # Retorna o salário base mais o total das horas extras
 
 # Teste do sistema de funcionários
 if __name__ == "__main__":
     # Criando uma lista heterogênea de funcionários
     funcionarios = [
-        Gerente("Carlos", 5000, 1000),  # Gerente com bônus
-        Programador("Ana", 4000, 10, 50),  # Programador com horas extras
-        Gerente("Paulo", 6000, 1500),  # Outro Gerente com bônus
-        Programador("Maria", 3500, 5, 60)  # Outro Programador com horas extras
+        Gerente("Lídia", 5000, 1000),  # Gerente com bônus
+        Programador("Nicoly", 4000, 10, 50),  # Programador com horas extras
+        Gerente("Isabelly", 6000, 1500),  # Outro Gerente com bônus
+        Programador("Débora", 3500, 5, 60)  # Outro Programador com horas extras
     ]
 
     # Iterando sobre a lista de funcionários e exibindo o nome e o salário calculado
@@ -79,17 +77,7 @@ if __name__ == "__main__":
     def descrever(self):
         super().descrever()  # Chamando o método descrever da classe base
         print(f"Edição: {self.edicao}")
-
-# Alguns testes...
-livro = Livro("O Senhor dos Anéis", 1954, "J.R.R. Tolkien")
-revista = Revista("Revista Exemplo", 2023, "Edição 42")
-
-print("Descrição do livro:")
-livro.descrever()
-
-print("\nDescrição da revista:")
-revista.descrever()
-
+        
 #---
 
 # Problema 2 - Veículos e Seus Atributos
@@ -123,15 +111,3 @@ class Moto(Veiculo):
     def exibir_info(self):
         super().exibir_info() # Chamando o método exibir_info da classe pai e exibindo os atributos da moto
         print(f"Cilindradas: {self.cilindradas}")
-
-# Alguns testes <3
-if __name__ == "__main__":
-    # Criando um carro e uma moto
-    carro = Carro("Ford", "Fusca", 4)
-    moto = Moto("Honda", "CB 500", 500)
-
-    print("Informações do Carro:")
-    carro.exibir_info()
-
-    print("\nInformações da Moto:")
-    moto.exibir_info()
